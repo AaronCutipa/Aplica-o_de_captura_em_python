@@ -1,0 +1,101 @@
+	#DROP DATABASE monitoramentoTotem;
+	CREATE DATABASE monitoramentoTotem;
+	USE monitoramentoTotem;
+
+/* DESCONTINUADO.........
+	CREATE TABLE maquina(
+    idMaquina INT PRIMARY KEY,
+    nucleosLogicos INT NOT NULL,
+    nucleosFisicos INT NOT NULL,
+    cpuFrequencia DOUBLE NOT NULL,
+    memoriaTotal DOUBLE NOT NULL,
+    discoTotal DOUBLE NOT NULL,
+    nomeProcessador VARCHAR(150) NOT NULL,
+    arquiteturaSistema VARCHAR(50) NOT NULL,
+    sistemaOperacional VARCHAR(50) NOT NULL,
+    versaoSO VARCHAR(50) NOT NULL
+);*/
+
+CREATE TABLE maquina(
+	idMaquina INT PRIMARY KEY AUTO_INCREMENT,
+	sistemaOperacional VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE dadosComp(
+    idRegistro INT PRIMARY KEY AUTO_INCREMENT,
+    cpu_porcentagem DOUBLE NOT NULL,
+    memoria_porcentagem DOUBLE NOT NULL,
+    disco_porcentagem DOUBLE NOT NULL,
+    bytes_enviados BIGINT NOT NULL,
+    bytes_recebidos BIGINT NOT NULL,
+    pacotes_enviados BIGINT NOT NULL,
+    pacotes_recebidos BIGINT NOT NULL,
+    data_coleta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fkMaquina INT NOT NULL,
+    CONSTRAINT fkdadosCompMaquina
+        FOREIGN KEY (fkMaquina) 
+        REFERENCES maquina(idMaquina)
+);
+
+INSERT INTO maquina(sistemaOperacional)
+VALUES
+("Windows");
+
+SELECT * FROM maquina;
+SELECT * FROM dadosComp;
+
+SELECT * FROM dadosComp WHERE fkMaquina = 1;
+
+INSERT INTO dadosComp (cpu_porcentagem, memoria_porcentagem, disco_porcentagem, bytes_enviados, bytes_recebidos, pacotes_enviados, pacotes_recebidos, fkMaquina) 
+VALUES 
+(23.5, 45.2, 12.8, 1048576, 2097152, 500, 600, 1),
+(45.7, 67.4, 32.1, 524288, 1048576, 300, 400, 1),
+(12.3, 29.8, 7.6, 786432, 1572864, 450, 550, 1),
+(56.2, 78.9, 43.5, 2097152, 4194304, 700, 800, 1),
+(34.8, 59.1, 25.4, 1048576, 2097152, 500, 600, 1),
+(67.1, 88.3, 52.7, 3145728, 6291456, 900, 1000, 1),
+(21.4, 39.7, 15.9, 524288, 1048576, 300, 400, 1),
+(78.5, 92.1, 65.3, 4194304, 8388608, 1200, 1300, 1),
+(49.2, 71.5, 37.8, 2097152, 4194304, 700, 800, 1),
+(85.6, 95.2, 74.1, 5242880, 10485760, 1500, 1600, 1),
+(38.7, 63.4, 28.5, 1048576, 2097152, 500, 600, 1),
+(92.3, 98.7, 82.9, 6291456, 12582912, 1800, 1900, 1),
+(29.5, 47.2, 18.6, 524288, 1048576, 300, 400, 1),
+(58.1, 79.5, 41.7, 2097152, 4194304, 700, 800, 1),
+(14.7, 33.1, 10.2, 786432, 1572864, 450, 550, 1),
+(71.4, 89.7, 55.8, 3145728, 6291456, 900, 1000, 1),
+(26.8, 42.9, 14.1, 1048576, 2097152, 500, 600, 1),
+(63.9, 83.2, 47.3, 2097152, 4194304, 700, 800, 1),
+(9.8, 27.4, 6.5, 524288, 1048576, 300, 400, 1),
+(77.2, 91.5, 62.4, 4194304, 8388608, 1200, 1300, 1),
+(41.6, 65.7, 30.2, 1048576, 2097152, 500, 600, 1),
+(88.9, 96.8, 76.5, 5242880, 10485760, 1500, 1600, 1),
+(36.5, 60.9, 26.3, 2097152, 4194304, 700, 800, 1),
+(95.1, 99.3, 85.7, 6291456, 12582912, 1800, 1900, 1),
+(28.3, 46.5, 17.9, 786432, 1572864, 450, 550, 1),
+(57.8, 78.1, 40.5, 3145728, 6291456, 900, 1000, 1),
+(13.2, 31.8, 9.6, 1048576, 2097152, 500, 600, 1),
+(70.5, 88.5, 54.2, 2097152, 4194304, 700, 800, 1),
+(22.6, 41.2, 13.4, 524288, 1048576, 300, 400, 1),
+(62.1, 82.7, 45.9, 4194304, 8388608, 1200, 1300, 1),
+(11.9, 29.3, 7.8, 3145728, 6291456, 900, 1000, 1),
+(75.8, 90.6, 61.1, 5242880, 10485760, 1500, 1600, 1),
+(39.1, 64.3, 29.4, 6291456, 12582912, 1800, 1900, 1),
+(87.3, 95.9, 75.2, 786432, 1572864, 450, 550, 1),
+(35.4, 59.8, 24.9, 1048576, 2097152, 500, 600, 1),
+(94.2, 98.9, 84.3, 2097152, 4194304, 700, 800, 1),
+(27.9, 45.3, 16.8, 3145728, 6291456, 900, 1000, 1),
+(56.6, 76.9, 39.1, 4194304, 8388608, 1200, 1300, 1),
+(15.3, 34.6, 11.1, 5242880, 10485760, 1500, 1600, 1),
+(69.7, 87.9, 53.1, 6291456, 12582912, 1800, 1900, 1),
+(24.5, 40.7, 12.7, 786432, 1572864, 450, 550, 1),
+(61.2, 81.5, 44.6, 1048576, 2097152, 500, 600, 1),
+(10.5, 28.1, 6.9, 2097152, 4194304, 700, 800, 1),
+(76.9, 91.2, 60.5, 3145728, 6291456, 900, 1000, 1),
+(42.8, 66.9, 31.8, 4194304, 8388608, 1200, 1300, 1),
+(89.5, 97.3, 77.1, 5242880, 10485760, 1500, 1600, 1),
+(30.2, 50.1, 20.3, 6291456, 12582912, 1800, 1900, 1),
+(96.7, 99.7, 86.9, 786432, 1572864, 450, 550, 1),
+(50.5, 73.1, 36.2, 1048576, 2097152, 500, 600, 1),
+(20.3, 38.2, 14.5, 2097152, 4194304, 700, 800, 1),
+(75.1, 89.3, 58.7, 3145728, 6291456, 900, 1000, 1);
